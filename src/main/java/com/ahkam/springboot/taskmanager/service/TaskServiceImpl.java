@@ -2,6 +2,7 @@ package com.ahkam.springboot.taskmanager.service;
 
 import com.ahkam.springboot.taskmanager.dao.TaskRepository;
 import com.ahkam.springboot.taskmanager.entity.Task;
+import com.ahkam.springboot.taskmanager.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,19 +32,8 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public Task findById(UUID id) {
-        Optional<Task> result = taskRepository.findById(id);
-
-        Task task = null;
-
-        if (result.isPresent()) {
-            task = result.get();
-        }
-        else {
-            // we didn't find the employee
-            throw new RuntimeException("Did not find employee id - " + id);
-        }
-
-        return task;
+        return taskRepository.findById(id).orElseThrow(() ->
+                new ResourceNotFoundException("Did not find employee id - " + id));
     }
 
     @Override
