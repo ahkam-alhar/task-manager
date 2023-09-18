@@ -12,7 +12,8 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:3000")
+// TODO: Change below origin URL as per your React project URL
+@CrossOrigin(origins = "http://localhost:{YOUR_REACT_PROJECT_PORT}")
 @RequestMapping("/api/tasks")
 public class TaskRestController {
 
