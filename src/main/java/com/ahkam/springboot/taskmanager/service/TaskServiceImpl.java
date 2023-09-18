@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -32,6 +31,10 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public Task findById(UUID id) {
+        /*
+        * Once the task is not there, ResourceNotFoundException will be called.
+        * If task is available, task will be returned
+        */I
         return taskRepository.findById(id).orElseThrow(() ->
                 new ResourceNotFoundException("Did not find employee id - " + id));
     }

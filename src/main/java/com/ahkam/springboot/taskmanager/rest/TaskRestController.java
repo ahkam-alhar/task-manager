@@ -1,7 +1,6 @@
 package com.ahkam.springboot.taskmanager.rest;
 
 import com.ahkam.springboot.taskmanager.entity.Task;
-import com.ahkam.springboot.taskmanager.exception.ResourceNotFoundException;
 import com.ahkam.springboot.taskmanager.service.TaskService;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
@@ -29,6 +28,7 @@ public class TaskRestController {
 
         // also just in case they pass an id in JSON ... set id to 0
         // this is to force a save of new item ... instead of update
+        // And also set current data and time to timestamp column
 
         task.setStatus((byte) 0);
         task.setTimestamp(new Date());
@@ -38,6 +38,7 @@ public class TaskRestController {
         return dbTask;
     }
 
+    // This will return all the tasks available in task table
     @GetMapping("")
     public List<Task> findAll() {
         return taskService.findAll();
@@ -47,10 +48,15 @@ public class TaskRestController {
     public Task updateTask(@RequestBody @Valid Task task, @PathVariable UUID id) {
         Task updateTask = taskService.findById(id);
 
+        /*
+        * set updated task, status and priority to existing task object.
+        * Without timestamp and id. These two fields are constant.
+        */
         updateTask.setTask(task.getTask());
         updateTask.setStatus(task.getStatus());
         updateTask.setPriority(task.getPriority());
 
+        // Already id is in the updateTask object so, this function will be an update not create.
         return taskService.save(updateTask);
     }
 

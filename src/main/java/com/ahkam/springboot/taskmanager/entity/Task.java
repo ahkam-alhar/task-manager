@@ -16,7 +16,10 @@ import java.util.UUID;
 @Table(name="task")
 public class Task {
 
+    // Lombok will create all necessary basic coding (Getters, Setters, Construction etc.) for Entity Class
+
     @Id
+    // No need to generate the ID below line will generate ID
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "id")
     private UUID id;
