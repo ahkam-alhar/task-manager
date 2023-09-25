@@ -28,14 +28,23 @@ Most of the IDEs download maven dependencies automatically. If maven dependency 
 
 **Note: Table Create query below**
 
-CREATE TABLE task ( id BINARY(16), task VARCHAR(255) NOT NULL, priority TINYINT, status TINYINT, timestamp VARCHAR(255), PRIMARY KEY(id) );
+> CREATE TABLE task ( id BINARY(16), task VARCHAR(255) NOT NULL, priority TINYINT, status TINYINT, timestamp VARCHAR(255), PRIMARY KEY(id) );
 
 ### 6. Run the project
 
 Easily build and run the project using Java IDE.
 
-If you can't run the project using IDE, please use the below command to run the project.
+If you can't run the project using IDE, please use the below command to create jar and run the project.
 
-`mvn spring-boot:run`
+##### 1. Create .jar file
+
+`./mvnw package` for MACOS
+`mvnw package` for Windows
+
+##### 2. Run app using: java -jar
+
+Jar file will be generated inside the target folder. Move to target folder and run below command
+
+`java -jar task-manager-0.0.1-SNAPSHOT.jar`
 
 ***Enjoy the Project!!!***
